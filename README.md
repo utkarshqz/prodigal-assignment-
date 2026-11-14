@@ -1,6 +1,6 @@
-# ACME Corp — AI Agent for Candidate Information Collection
+# AI Agent for Candidate Information Collection
 
-**Assignment NMIMS'26** · Participant: U Sonawane
+**Assignment NMIMS'26** ·
 
 An autonomous AI chat agent that completes internship applications by conversing naturally
 with candidates over a terminal chat interface (simulating WhatsApp).
