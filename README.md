@@ -41,42 +41,71 @@ Open in your browser:
 python agent.py --candidate-id c001
 ```
 
-# 5. (Optional) Reset your workspace data
+### Option C: Reset Workspace Data
+```bash
 python -c "import api_client; api_client.reset_workspace(); print('Reset done')"
 ```
 
-**To exit a chat:** type `/quit` or `/done`.
+**To exit a chat:** type `/quit` or `/done`.  
 **Run logs** are saved automatically to `runs/<candidate_id>_<timestamp>.json`.
 
 ---
 
 ## Architecture
 
+```mermaid
+flowchart TD
+    Start["Run Agent (--candidate-id <id>)"] --> FetchDB["GET /v1/candidates/{id}"]
+    FetchDB --> CheckMissing{"Any mandatory fields missing?"}
+    
+    CheckMissing -- "No (Complete)" --> ExitEarly["Exit cleanly (No outreach needed)"]
+    CheckMissing -- "Yes (Missing Fields)" --> InitPrompt["Build System Prompt with Existing Profile + Schema Rules"]
+    
+    InitPrompt --> AgentLoop["Agentic Loop (Gemini 3.5 Flash-Lite)"]
+    
+    subgraph Agentic_Decision_Engine ["Autonomous Tool Calling"]
+        AgentLoop --> LLMChoice{"Gemini Decision"}
+        LLMChoice -- "Ask question" --> ChatMsg["Send message to Candidate"]
+        ChatMsg --> CandidateReply["Candidate replies via Chat"]
+        CandidateReply --> AgentLoop
+        
+        LLMChoice -- "Field received" --> ToolValidate["Tool: validate_and_stage_field"]
+        ToolValidate -- "Valid" --> ToolUpdate["Tool: update_candidate (PATCH API with If-Match)"]
+        ToolValidate -- "Invalid" --> ReAsk["LLM explains validation error and re-asks"]
+        ReAsk --> ChatMsg
+        ToolUpdate --> AgentLoop
+        
+        LLMChoice -- "All collected / Refusal / Exit" --> ToolFinish["Tool: finish_conversation"]
+    end
+    
+    ToolFinish --> SaveRun["Write JSON run transcript to /runs"]
+    SaveRun --> Done["Process Complete"]
 ```
-run: python agent.py --candidate-id <id>
-        │
-        ├─ 1. GET /v1/candidates/{id}          ← fetch current record
-        │       Compute missing mandatory fields
-        │       If nothing missing → exit (no conversation)
-        │
-        ├─ 2. Build Gemini system prompt        ← context: existing data + missing fields
-        │
-        ├─ 3. Agent Loop (Gemini 1.5 Flash + Function Calling)
-        │       ┌──────────────────────────────────────────────┐
-        │       │  LLM generates text or function call        │
-        │       │        ↓                                     │
-        │       │  Tool Executor runs the tool:               │
-        │       │    • get_candidate_info   → GET /v1/...     │
-        │       │    • validate_and_stage_field → local rules │
-        │       │    • update_candidate     → PATCH /v1/...   │
-        │       │    • finish_conversation  → PATCH + exit    │
-        │       │        ↓                                     │
-        │       │  Tool result fed back to LLM               │
-        │       │        ↓                                     │
-        │       │  LLM prints message → human types reply     │
-        │       └──────────────────────────────────────────────┘
-        │
-        └─ 4. Save run log to runs/<id>_<ts>.json
+
+```text
++-------------------------------------------------------------------------------+
+|                             AGENT EXECUTION FLOW                              |
++-------------------------------------------------------------------------------+
+  run: python agent.py --candidate-id <id>
+        |
+        +--> 1. GET /v1/candidates/{id} (Fetch record & compute missing fields)
+        |       If nothing missing --> Exit immediately (Zero wasted contacts)
+        |
+        +--> 2. Build Gemini System Prompt (Candidate profile + schema rules)
+        |
+        +--> 3. Agentic Loop (Gemini 3.5 Flash-Lite + Function Calling)
+        |       +-------------------------------------------------------------+
+        |       | LLM evaluates candidate input and decides next action:      |
+        |       |   * validate_and_stage_field -> Enforces local validation   |
+        |       |   * update_candidate         -> PATCH API with If-Match     |
+        |       |   * finish_conversation      -> Records final status        |
+        |       |   * get_candidate_info       -> Re-fetches current DB state |
+        |       |                                                             |
+        |       | Tool response fed back into LLM -> Natural reply generated  |
+        |       +-------------------------------------------------------------+
+        |
+        +--> 4. Final outcome saved to DB & Run transcript written to runs/<id>.json
++-------------------------------------------------------------------------------+
 ```
 
 ### Tools the LLM can call
