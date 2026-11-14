@@ -22,14 +22,24 @@ cp .env.example .env
 # Edit .env — set GEMINI_API_KEY (free at https://aistudio.google.com/apikey)
 # CANDIDATE_API_KEY is already set for the workspace
 
-# 4. Run the Agent
+# 4. Run the Agent & Dashboards
 
-# Option A: Interactive Web UI (Recommended for Live Evaluation Demo)
+### Option A: Web Applications (Recommended for Demonstration)
+```bash
 python app.py
-# Open http://127.0.0.1:5000 in your browser
+```
+Open in your browser:
+- 🧑‍🎓 **Student Chat Portal**: `http://127.0.0.1:5000/`  
+  Clean candidate chat interface to test completing an application.
+- 🛡️ **Administrator DB & Transcript Monitor**: `http://127.0.0.1:5000/admin`  
+  Live view of all candidate records in the DB, statuses, missing fields, and chat transcripts.
+- ⚡ **Agent Actions & Tool Calls Inspector**: `http://127.0.0.1:5000/agent-telemetry`  
+  Real-time telemetry stream showing LLM tool calls (`validate_and_stage_field`, `update_candidate`, `finish_conversation`) and API request payloads.
 
-# Option B: Terminal CLI Chat Loop
+### Option B: Terminal CLI Chat Loop
+```bash
 python agent.py --candidate-id c001
+```
 
 # 5. (Optional) Reset your workspace data
 python -c "import api_client; api_client.reset_workspace(); print('Reset done')"

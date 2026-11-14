@@ -1,0 +1,138 @@
+{
+  "candidate_id": "c002",
+  "candidate_name": "Priya Nair",
+  "last_updated": "2026-11-14T15:49:04.452022+05:30",
+  "final_status": "in_progress",
+  "missing_fields": [
+    "available_from",
+    "internship_duration_months"
+  ],
+  "chat_log": [
+    {
+      "role": "agent",
+      "text": "Hi Priya! \ud83d\udc4b I'm reaching out from ACME Corp regarding your internship application. Am I chatting with Priya Nair?"
+    },
+    {
+      "role": "candidate",
+      "text": "hi"
+    },
+    {
+      "role": "agent",
+      "text": "Great! It's wonderful to connect with you, Priya. \n\nI just need to grab a few quick details to complete your internship application. To start off, what is your expected **graduation year** (2026\u20132028)?"
+    },
+    {
+      "role": "candidate",
+      "text": "yes"
+    },
+    {
+      "role": "agent",
+      "text": "Awesome! Could you let me know your **graduation year**? (Looking for a year between 2026 and 2028)"
+    },
+    {
+      "role": "candidate",
+      "text": "3036"
+    },
+    {
+      "role": "agent",
+      "text": "Ah, that year looks a bit too far in the future! \ud83d\ude04 \n\nCould you double-check and enter a graduation year between 2026 and 2028?"
+    },
+    {
+      "role": "candidate",
+      "text": "yeah , 2026"
+    },
+    {
+      "role": "agent",
+      "text": "Got it, 2026! \ud83c\udf93\n\nNext up, when would you be **available to start** your internship? (Please share a date in YYYY-MM-DD format between Jan 2026 and Dec 2027)"
+    }
+  ],
+  "agent_activity_timeline": [
+    {
+      "type": "decision",
+      "title": "Fetched Candidate: Priya Nair",
+      "detail": "Status: pending | Missing fields: ['graduation_year', 'available_from', 'internship_duration_months']"
+    },
+    {
+      "type": "tool",
+      "title": "Tool: validate_and_stage_field ('graduation_year')",
+      "detail": {
+        "ok": false,
+        "error": "Graduation year must be between 2026 and 2028 (got 3036).",
+        "coerced": null
+      }
+    },
+    {
+      "type": "tool",
+      "title": "Tool: validate_and_stage_field ('graduation_year')",
+      "detail": {
+        "ok": true,
+        "error": "",
+        "coerced": 2026
+      }
+    },
+    {
+      "type": "api",
+      "title": "API PATCH /v1/candidates/c002",
+      "detail": {
+        "updates": {
+          "graduation_year": 2026,
+          "collection_status": "in_progress",
+          "attempt_count": 1,
+          "last_contacted_at": "2026-11-14T15:48:59.738892+05:30"
+        },
+        "version_sent": 1,
+        "response": {
+          "id": "c002",
+          "full_name": "Priya Nair",
+          "email": "priya.nair@example.com",
+          "college": "VJTI, Mumbai",
+          "degree": "B.Tech",
+          "branch": "Information Technology",
+          "graduation_year": 2026,
+          "cgpa": 8.7,
+          "preferred_location": "Remote",
+          "available_from": null,
+          "internship_duration_months": null,
+          "linkedin_url": null,
+          "github_url": null,
+          "skills": [
+            "Java",
+            "Spring Boot"
+          ],
+          "phone": "+915979788251",
+          "collection_status": "in_progress",
+          "attempt_count": 1,
+          "last_contacted_at": "2026-11-14T15:48:59.738892+05:30",
+          "notes": null,
+          "version": 2,
+          "updated_at": "2026-11-14T10:19:00+00:00"
+        }
+      }
+    }
+  ],
+  "candidate_state": {
+    "id": "c002",
+    "full_name": "Priya Nair",
+    "email": "priya.nair@example.com",
+    "college": "VJTI, Mumbai",
+    "degree": "B.Tech",
+    "branch": "Information Technology",
+    "graduation_year": 2026,
+    "cgpa": 8.7,
+    "preferred_location": "Remote",
+    "available_from": null,
+    "internship_duration_months": null,
+    "linkedin_url": null,
+    "github_url": null,
+    "skills": [
+      "Java",
+      "Spring Boot"
+    ],
+    "phone": "+915979788251",
+    "collection_status": "in_progress",
+    "attempt_count": 1,
+    "last_contacted_at": "2026-11-14T15:48:59.738892+05:30",
+    "notes": null,
+    "version": 2,
+    "updated_at": "2026-11-14T10:19:00+00:00"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "candidate_id": "c001",
+  "candidate_name": "Aarav Mehta",
+  "last_updated": "2026-11-14T15:40:25.529713+05:30",
+  "final_status": "pending",
+  "missing_fields": [
+    "email",
+    "cgpa"
+  ],
+  "chat_log": [
+    {
+      "role": "agent",
+      "text": "Hey Aarav! \ud83d\udc4b Hope you're having a good week. \n\nI'm reaching out from the ACME Corp internship team to get a couple of quick details wrapped up for your application. Am I chatting with the right Aarav Mehta?"
+    },
+    {
+      "role": "candidate",
+      "text": "ih"
+    },
+    {
+      "role": "agent",
+      "text": "Awesome, glad to connect with you, Aarav! \n\nWe've got your details from your profile, but we just need your **email address** and your **CGPA** to complete your application. \n\nCould you share your email address with me first?"
+    }
+  ],
+  "agent_activity_timeline": [
+    {
+      "type": "decision",
+      "title": "Fetched Candidate: Aarav Mehta",
+      "detail": "Status: pending | Missing fields: ['email', 'cgpa']"
+    },
+    {
+      "type": "tool",
+      "title": "Tool: get_candidate_info",
+      "detail": {
+        "candidate": {
+          "id": "c001",
+          "full_name": "Aarav Mehta",
+          "email": null,
+          "college": "NMIMS MPSTME, Mumbai",
+          "degree": "B.Tech",
+          "branch": "Computer Engineering",
+          "graduation_year": 2027,
+          "cgpa": null,
+          "preferred_location": "Mumbai",
+          "available_from": "2027-01-04",
+          "internship_duration_months": 6,
+          "linkedin_url": "https://www.linkedin.com/in/aarav-mehta-example",
+          "github_url": null,
+          "skills": [
+            "Python",
+            "SQL"
+          ],
+          "phone": "+915342685040",
+          "collection_status": "pending",
+          "attempt_count": 0,
+          "last_contacted_at": null,
+          "notes": null,
+          "version": 1,
+          "updated_at": "2026-11-14T10:07:03+00:00"
+        },
+        "missing": [
+          "email",
+          "cgpa"
+        ],
+        "complete": false
+      }
+    }
+  ],
+  "candidate_state": {
+    "id": "c001",
+    "full_name": "Aarav Mehta",
+    "email": null,
+    "college": "NMIMS MPSTME, Mumbai",
+    "degree": "B.Tech",
+    "branch": "Computer Engineering",
+    "graduation_year": 2027,
+    "cgpa": null,
+    "preferred_location": "Mumbai",
+    "available_from": "2027-01-04",
+    "internship_duration_months": 6,
+    "linkedin_url": "https://www.linkedin.com/in/aarav-mehta-example",
+    "github_url": null,
+    "skills": [
+      "Python",
+      "SQL"
+    ],
+    "phone": "+915342685040",
+    "collection_status": "pending",
+    "attempt_count": 0,
+    "last_contacted_at": null,
+    "notes": null,
+    "version": 1,
+    "updated_at": "2026-11-14T10:07:03+00:00"
+  }
+}

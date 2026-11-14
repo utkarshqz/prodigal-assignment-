@@ -284,7 +284,42 @@ def _run_gemini_turn(prompt_or_response):
 @app.route("/")
 def index():
     candidates = db.list_candidates()
-    return render_template("index.html", candidates=candidates)
+    return render_template("student.html", candidates=candidates)
+
+
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
+
+@app.route("/agent-telemetry")
+def agent_telemetry():
+    return render_template("agent_telemetry.html")
+
+
+@app.route("/api/telemetry", methods=["GET"])
+def get_telemetry():
+    return jsonify({
+        "candidate_id": SESSION.get("candidate_id"),
+        "candidate": SESSION.get("candidate"),
+        "missing": SESSION.get("missing", []),
+        "timeline": SESSION.get("timeline", []),
+        "finished": SESSION.get("finished", False)
+    })
+
+
+@app.route("/api/run_detail/<filename>", methods=["GET"])
+def get_run_detail(filename):
+    runs_dir = Path("runs")
+    target = runs_dir / filename
+    if not target.exists() or not target.is_file():
+        return jsonify({"error": "Run not found"}), 404
+    try:
+        with open(target, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/api/candidates", methods=["GET"])
