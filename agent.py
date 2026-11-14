@@ -26,7 +26,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 
 import api_client as db
-from validator import validate_field, MANDATORY_FIELDS
+from validator import validate_field
 
 load_dotenv()
 
