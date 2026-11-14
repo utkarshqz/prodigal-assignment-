@@ -105,3 +105,4 @@ def missing_fields(candidate: dict) -> list[str]:
 def now_iso() -> str:
     """Current datetime as ISO 8601 with UTC offset."""
     return datetime.now(tz=timezone.utc).astimezone().isoformat()
+

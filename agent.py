@@ -373,7 +373,7 @@ def agent_loop(candidate_id: str, run_output_dir: Path | None = None):
     )
 
     model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
+        model_name="gemini-3.5-flash-lite",
         system_instruction=build_system_prompt(candidate, missing),
         tools=[tools_spec],
         generation_config=genai.GenerationConfig(temperature=0.4),
@@ -498,3 +498,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

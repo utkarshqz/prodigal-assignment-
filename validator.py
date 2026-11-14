@@ -142,3 +142,4 @@ def validate_field(field: str, value) -> dict:
         coerced = value.strip() if isinstance(value, str) else value
 
     return {"ok": ok, "error": msg, "coerced": coerced if ok else None}
+

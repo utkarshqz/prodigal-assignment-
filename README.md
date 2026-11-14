@@ -137,3 +137,4 @@ run: python agent.py --candidate-id <id>
 | c006 | Ananya Desai | *(complete)* |
 | c007 | Vikram Rao | *(all mandatory fields missing)* |
 | c008 | Meera Joshi | cgpa |
+
