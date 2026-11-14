@@ -1,0 +1,108 @@
+{
+  "candidate_id": "c001",
+  "candidate_name": "Aarav Mehta",
+  "timestamp": "2026-11-14T15:20:00+05:30",
+  "final_status": "completed",
+  "missing_fields_initial": [
+    "email",
+    "cgpa"
+  ],
+  "missing_fields_final": [],
+  "chat_log": [
+    {
+      "role": "agent",
+      "text": "Hi Aarav! I'm reaching out from ACME Corp regarding your internship application. Am I speaking with Aarav Mehta?"
+    },
+    {
+      "role": "candidate",
+      "text": "Yes, this is Aarav."
+    },
+    {
+      "role": "agent",
+      "text": "Awesome! Your application is almost complete, but we're missing your email address and your current CGPA. Could you share your email with me?"
+    },
+    {
+      "role": "candidate",
+      "text": "aarav.mehta@example.com"
+    },
+    {
+      "role": "agent",
+      "text": "Got it. And what is your current CGPA on a 10-point scale?"
+    },
+    {
+      "role": "candidate",
+      "text": "It is 8.65"
+    },
+    {
+      "role": "agent",
+      "text": "Thank you Aarav! All mandatory details for your internship application are now complete. We will reach out if you are shortlisted."
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "get_candidate_info",
+      "args": {
+        "candidate_id": "c001"
+      },
+      "result": {
+        "candidate_id": "c001",
+        "missing_mandatory_fields": [
+          "email",
+          "cgpa"
+        ]
+      }
+    },
+    {
+      "tool": "validate_and_stage_field",
+      "args": {
+        "field": "email",
+        "value": "aarav.mehta@example.com"
+      },
+      "result": {
+        "ok": true,
+        "error": "",
+        "coerced": "aarav.mehta@example.com"
+      }
+    },
+    {
+      "tool": "validate_and_stage_field",
+      "args": {
+        "field": "cgpa",
+        "value": "8.65"
+      },
+      "result": {
+        "ok": true,
+        "error": "",
+        "coerced": 8.65
+      }
+    },
+    {
+      "tool": "update_candidate",
+      "args": {
+        "candidate_id": "c001",
+        "updates": {
+          "email": "aarav.mehta@example.com",
+          "cgpa": 8.65
+        },
+        "collection_status": "in_progress"
+      },
+      "result": {
+        "success": true,
+        "version_sent": 1,
+        "status_code": 200
+      }
+    },
+    {
+      "tool": "finish_conversation",
+      "args": {
+        "candidate_id": "c001",
+        "status": "completed",
+        "notes": "All mandatory fields collected and validated successfully."
+      },
+      "result": {
+        "done": true,
+        "status": "completed"
+      }
+    }
+  ]
+}

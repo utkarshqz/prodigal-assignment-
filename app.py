@@ -36,6 +36,30 @@ SESSION = {
 
 from agent import TOOLS, build_system_prompt
 
+def save_run_log():
+    if not SESSION.get("candidate_id") or not SESSION.get("chat_history"):
+        return
+    runs_dir = Path("runs")
+    runs_dir.mkdir(parents=True, exist_ok=True)
+    cid = SESSION["candidate_id"]
+    cand_name = SESSION["candidate"].get("full_name", cid) if SESSION.get("candidate") else cid
+    status = SESSION["candidate"].get("collection_status", "in_progress") if SESSION.get("candidate") else "unknown"
+    
+    run_file = runs_dir / f"{cid}_latest.json"
+    run_data = {
+        "candidate_id": cid,
+        "candidate_name": cand_name,
+        "last_updated": db.now_iso(),
+        "final_status": status,
+        "missing_fields": SESSION.get("missing", []),
+        "chat_log": SESSION.get("chat_history", []),
+        "agent_activity_timeline": SESSION.get("timeline", []),
+        "candidate_state": SESSION.get("candidate", {})
+    }
+    with open(run_file, "w", encoding="utf-8") as f:
+        json.dump(run_data, f, indent=2, default=str)
+
+
 def init_agent_session(candidate_id: str):
     cand = db.get_candidate(candidate_id)
     missing = db.missing_fields(cand)
@@ -105,6 +129,7 @@ def init_agent_session(candidate_id: str):
 
     # Start conversation
     _run_gemini_turn("Begin the conversation now. Greet the candidate by name and confirm identity.")
+    save_run_log()
 
 
 def execute_tool_call(tool_name: str, tool_args: dict):
@@ -314,6 +339,8 @@ def send_message():
     except Exception:
         pass
 
+    save_run_log()
+
     return jsonify({
         "candidate": SESSION["candidate"],
         "missing": SESSION["missing"],
@@ -334,9 +361,34 @@ def reset_workspace():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/api/runs", methods=["GET"])
+def get_runs():
+    runs_dir = Path("runs")
+    if not runs_dir.exists():
+        return jsonify({"runs": []})
+    run_files = sorted(runs_dir.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+    summary = []
+    for rf in run_files:
+        try:
+            with open(rf, "r", encoding="utf-8") as f:
+                d = json.load(f)
+                summary.append({
+                    "filename": rf.name,
+                    "candidate_id": d.get("candidate_id"),
+                    "candidate_name": d.get("candidate_name"),
+                    "status": d.get("final_status"),
+                    "last_updated": d.get("last_updated"),
+                    "message_count": len(d.get("chat_log", []))
+                })
+        except Exception:
+            continue
+    return jsonify({"runs": summary})
+
+
 if __name__ == "__main__":
     print("\n" + "="*60)
     print("🚀 ACME Corp Agent Evaluation Server running!")
     print("👉 Open in browser: http://127.0.0.1:5000")
     print("="*60 + "\n")
     app.run(host="127.0.0.1", port=5000, debug=False)
+

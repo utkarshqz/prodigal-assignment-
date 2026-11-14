@@ -1,0 +1,85 @@
+{
+  "candidate_id": "c005",
+  "candidate_name": "Kabir Shah",
+  "timestamp": "2026-11-14T15:25:00+05:30",
+  "final_status": "completed",
+  "missing_fields_initial": [
+    "preferred_location"
+  ],
+  "missing_fields_final": [],
+  "chat_log": [
+    {
+      "role": "agent",
+      "text": "Hi Kabir! Reaching out from ACME Corp regarding your internship submission. Confirming I am speaking with Kabir Shah?"
+    },
+    {
+      "role": "candidate",
+      "text": "Yes, Kabir here."
+    },
+    {
+      "role": "agent",
+      "text": "Thanks Kabir! We just need your preferred work location. Your options are: Mumbai, Bengaluru, Remote, or No preference."
+    },
+    {
+      "role": "candidate",
+      "text": "I'd prefer Bengaluru."
+    },
+    {
+      "role": "agent",
+      "text": "Recorded Bengaluru as your preferred location. Your application profile is now 100% complete. Best of luck!"
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "get_candidate_info",
+      "args": {
+        "candidate_id": "c005"
+      },
+      "result": {
+        "candidate_id": "c005",
+        "missing_mandatory_fields": [
+          "preferred_location"
+        ]
+      }
+    },
+    {
+      "tool": "validate_and_stage_field",
+      "args": {
+        "field": "preferred_location",
+        "value": "Bengaluru"
+      },
+      "result": {
+        "ok": true,
+        "error": "",
+        "coerced": "Bengaluru"
+      }
+    },
+    {
+      "tool": "update_candidate",
+      "args": {
+        "candidate_id": "c005",
+        "updates": {
+          "preferred_location": "Bengaluru"
+        },
+        "collection_status": "completed",
+        "notes": "Collected preferred_location."
+      },
+      "result": {
+        "success": true,
+        "version_sent": 1,
+        "status_code": 200
+      }
+    },
+    {
+      "tool": "finish_conversation",
+      "args": {
+        "candidate_id": "c005",
+        "status": "completed"
+      },
+      "result": {
+        "done": true,
+        "status": "completed"
+      }
+    }
+  ]
+}
