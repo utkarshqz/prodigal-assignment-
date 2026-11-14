@@ -1,7 +1,7 @@
 {
   "candidate_id": "c001",
   "candidate_name": "Aarav Mehta",
-  "last_updated": "2026-11-14T15:56:14.396875+05:30",
+  "last_updated": "2026-11-14T16:12:45.666646+05:30",
   "final_status": "in_progress",
   "missing_fields": [
     "email"
@@ -10,6 +10,14 @@
     {
       "role": "agent",
       "text": "Hi Aarav! \ud83d\udc4b I'm reaching out from ACME Corp regarding your internship application. Am I speaking with the right Aarav Mehta? \n\nI just need to grab your email address to complete your application profile, and we'll be all set! Could you please share your email with me?"
+    },
+    {
+      "role": "candidate",
+      "text": "hi , who are you"
+    },
+    {
+      "role": "agent",
+      "text": "Hey there! I'm an assistant from ACME Corp. We're currently processing your application for the internship programme. \n\nWe have most of your details on file from your initial application (like your B.Tech in Computer Engineering from NMIMS MPSTME), but I just need your email address to complete your profile. \n\nCould you share your email address with me?"
     }
   ],
   "agent_activity_timeline": [

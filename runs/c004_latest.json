@@ -1,0 +1,47 @@
+{
+  "candidate_id": "c004",
+  "candidate_name": "Sneha Iyer",
+  "last_updated": "2026-11-14T16:12:55.800050+05:30",
+  "final_status": "pending",
+  "missing_fields": [
+    "college",
+    "degree",
+    "branch"
+  ],
+  "chat_log": [
+    {
+      "role": "agent",
+      "text": "Hi Sneha! \ud83d\udc4b I hope you're having a great day. \n\nI'm reaching out from ACME Corp regarding your internship application. Am I chatting with the right Sneha Iyer?"
+    }
+  ],
+  "agent_activity_timeline": [
+    {
+      "type": "decision",
+      "title": "Fetched Candidate: Sneha Iyer",
+      "detail": "Status: pending | Missing fields: ['college', 'degree', 'branch']"
+    }
+  ],
+  "candidate_state": {
+    "id": "c004",
+    "full_name": "Sneha Iyer",
+    "email": "sneha.iyer@example.com",
+    "college": null,
+    "degree": null,
+    "branch": null,
+    "graduation_year": 2027,
+    "cgpa": 9.1,
+    "preferred_location": "No preference",
+    "available_from": "2027-02-01",
+    "internship_duration_months": 3,
+    "linkedin_url": null,
+    "github_url": null,
+    "skills": null,
+    "phone": "+915115276714",
+    "collection_status": "pending",
+    "attempt_count": 0,
+    "last_contacted_at": null,
+    "notes": null,
+    "version": 1,
+    "updated_at": "2026-11-14T10:07:03+00:00"
+  }
+}

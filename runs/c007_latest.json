@@ -1,0 +1,53 @@
+{
+  "candidate_id": "c007",
+  "candidate_name": "Vikram Rao",
+  "last_updated": "2026-11-14T16:13:22.525422+05:30",
+  "final_status": "pending",
+  "missing_fields": [
+    "email",
+    "college",
+    "degree",
+    "branch",
+    "graduation_year",
+    "cgpa",
+    "preferred_location",
+    "available_from",
+    "internship_duration_months"
+  ],
+  "chat_log": [
+    {
+      "role": "agent",
+      "text": "Hi Vikram! \ud83d\udc4b I'm reaching out from ACME Corp regarding your internship application. Am I chatting with the right Vikram Rao?"
+    }
+  ],
+  "agent_activity_timeline": [
+    {
+      "type": "decision",
+      "title": "Fetched Candidate: Vikram Rao",
+      "detail": "Status: pending | Missing fields: ['email', 'college', 'degree', 'branch', 'graduation_year', 'cgpa', 'preferred_location', 'available_from', 'internship_duration_months']"
+    }
+  ],
+  "candidate_state": {
+    "id": "c007",
+    "full_name": "Vikram Rao",
+    "email": null,
+    "college": null,
+    "degree": null,
+    "branch": null,
+    "graduation_year": null,
+    "cgpa": null,
+    "preferred_location": null,
+    "available_from": null,
+    "internship_duration_months": null,
+    "linkedin_url": null,
+    "github_url": null,
+    "skills": null,
+    "phone": "+915316099769",
+    "collection_status": "pending",
+    "attempt_count": 0,
+    "last_contacted_at": null,
+    "notes": null,
+    "version": 1,
+    "updated_at": "2026-11-14T10:07:03+00:00"
+  }
+}
