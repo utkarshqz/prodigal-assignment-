@@ -22,13 +22,12 @@ import textwrap
 from datetime import datetime, timezone
 from pathlib import Path
 
-import google.generativeai as genai
 from dotenv import load_dotenv
+load_dotenv()  # must load before any module reads os.getenv at import time
 
+import google.generativeai as genai
 import api_client as db
 from validator import validate_field
-
-load_dotenv()
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 

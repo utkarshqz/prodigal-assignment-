@@ -22,7 +22,13 @@ cp .env.example .env
 # Edit .env — set GEMINI_API_KEY (free at https://aistudio.google.com/apikey)
 # CANDIDATE_API_KEY is already set for the workspace
 
-# 4. Run the agent for a specific candidate
+# 4. Run the Agent
+
+# Option A: Interactive Web UI (Recommended for Live Evaluation Demo)
+python app.py
+# Open http://127.0.0.1:5000 in your browser
+
+# Option B: Terminal CLI Chat Loop
 python agent.py --candidate-id c001
 
 # 5. (Optional) Reset your workspace data

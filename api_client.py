@@ -5,18 +5,20 @@ import os
 import uuid
 import requests
 from datetime import datetime, timezone
+from dotenv import load_dotenv
 
+load_dotenv()
 
 BASE_URL = os.getenv(
     "CANDIDATE_BASE_URL",
     "https://candidate-db-api.service.external.usea2.aws.prodigaltech.com"
 )
-API_KEY = os.getenv("CANDIDATE_API_KEY", "")
 
 
 def _headers(extra: dict | None = None) -> dict:
+    api_key = os.getenv("CANDIDATE_API_KEY", "")
     h = {
-        "Authorization": f"Bearer {API_KEY}",
+        "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
     if extra:
