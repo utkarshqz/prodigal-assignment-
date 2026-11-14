@@ -61,14 +61,6 @@
             </div>
         </div>
 
-        <!-- Quick actions for test demonstration -->
-        <div class="px-3 py-1 bg-white border-top d-flex gap-2" id="quickActions" style="display:none !important;">
-            <button class="btn btn-sm btn-outline-secondary py-0" style="font-size: 0.75rem;" onclick="sendQuick('Yes, speaking')">"Yes, speaking"</button>
-            <button class="btn btn-sm btn-outline-secondary py-0" style="font-size: 0.75rem;" onclick="sendQuick('I want to continue later')">"Continue later"</button>
-            <button class="btn btn-sm btn-outline-secondary py-0" style="font-size: 0.75rem;" onclick="sendQuick('I decline to share my CGPA')">"Refuse CGPA"</button>
-            <button class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.75rem;" onclick="sendQuick('/quit')">/quit</button>
-        </div>
-
         <div class="chat-input-bar">
             <input type="text" id="userInput" class="form-control" placeholder="Type your response here... (or /quit to exit)" disabled onkeydown="if(event.key==='Enter') sendMessage()">
             <button id="sendBtn" class="btn btn-primary px-4" onclick="sendMessage()" disabled>
@@ -107,7 +99,6 @@ function renderChat(data) {
     document.getElementById("chatTitle").innerText = `${cand.full_name}`;
     document.getElementById("chatSubtitle").innerText = `Phone: ${cand.phone} • Status: ${cand.collection_status || 'pending'}`;
     document.getElementById("activeStatusBadge").style.display = data.finished ? "none" : "inline-block";
-    document.getElementById("quickActions").style.setProperty("display", data.finished ? "none" : "flex", "important");
 
     const chatDiv = document.getElementById("chatMessages");
     chatDiv.innerHTML = "";
@@ -151,11 +142,6 @@ async function sendMessage() {
         input.disabled = false;
         document.getElementById("sendBtn").disabled = false;
     }
-}
-
-function sendQuick(text) {
-    document.getElementById("userInput").value = text;
-    sendMessage();
 }
 
 function escapeHtml(text) {
